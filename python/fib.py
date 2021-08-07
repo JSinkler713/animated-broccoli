@@ -29,4 +29,4 @@ fibby13 = nthFibonacci(7) # 8th fiby13 = 13
 # helps searchFib(3) resolve, which then
 # helps searchFib(4) resolve with searchFib(3), and the hashtable lookup of searchFib(2)
 print(fibby) #5th fib number at position 4, returns 3
-print(fibby10) #5th fib number at position 4, returns 3
+print(fibby13) #8th fib number at position 7, returns 13
