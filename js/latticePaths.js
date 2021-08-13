@@ -4,7 +4,7 @@ function latticePaths(m, n) {
     // Base cases
         if (row>m || col>n) {
             return 0
-        } else if (row == m && col ==n){
+        } else if (row == m && col == n){
             return 1
         }
         return recursePaths(row + 1, col) + recursePaths(row, col + 1)
