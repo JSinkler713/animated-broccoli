@@ -139,3 +139,37 @@ intersectingLists(testLink1, testLink2) // good
 intersectingLists(testLink2, testLink1) // good
 intersectingLists(firstShared, secondShared) // good
 console.log(intersectingLists(secondShared, firstShared)) // working 
+
+
+// less efficient solution storing each node in a set, and checking if in there
+function inefficientIntersectingLists(ll1, ll2) {
+  let firstNode = ll1
+  let secondNode = ll2
+  const setOfNodes = new Set()
+  // make a set of nodes
+  while (firstNode !== null) {
+    setOfNodes.add(firstNode)
+    firstNode = firstNode.next
+  }
+  // loop through second linkedList check for overlap
+  while (secondNode !== null) {
+    if (setOfNodes.has(secondNode)) {
+      return secondNode
+    }
+    secondNode = secondNode.next
+  }
+  // didn't have overlap
+  return 'No Overlap'
+}
+console.log('***********************')
+console.log(inefficientIntersectingLists(testLink2, testLink1)) // 'No overlap'
+console.log(inefficientIntersectingLists(firstShared, secondShared))
+/* {
+  data: 4,
+  next: {
+    data: 5,
+    next: null
+  }
+}
+*/
+console.log('***********************')
