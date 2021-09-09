@@ -20,17 +20,19 @@
  *            robotPaths(matrix) = 4
  *
  *  Note:     From any point, you can travel in the four cardinal directions
+ *  
  *            (north, south, east, west). A path is valid as long as it travels
  *            from the top left corner to the bottom right corner, does not go
  *            off of the matrix, and does not travel back on itself
+ *
 */
 
 // TEST CASES
 const matrixThirtyEight = [[0,0,0,0],
-          [0,0,0,0],
-          [0,0,0,0]]
+                          [0,0,0,0],
+                          [0,0,0,0]]
 const matrixFour = [[0,0,0],
-              [0,0,0]]
+                    [0,0,0]]
  
 const robotPaths = (matrix) => {
   let MaxRow = matrix.length - 1
