@@ -18,9 +18,6 @@
  *
  *  If we don't have another zero we need to terminate doing recursive calls, but
  *  We should keep track of where we have been, so we don't double count
- *
- *
- * 
  */
 
 const testLand =  [
@@ -40,7 +37,7 @@ function pondCount(land) {
     // base case
     // out of bounds or not 0 or visited
     if ( row < 0 || col < 0 || row > maxRow || col > maxCol || land[row][col] !== 0 || visitedPlaces[row+'_'+col] == true) {
-      return
+      return 0
     }
     console.log('in recursion helper', row, col)
     
@@ -64,7 +61,9 @@ function pondCount(land) {
     for (let j=0; j<= maxCol; j++) {
       console.log('i and j', i, j)
       let pondSize = recursionHelper(i, j)
-      pondSizes.push(pondSize)
+      if (pondSize > 0) {
+        pondSizes.push(pondSize)
+      }
     }
   }
   console.log(visitedPlaces)
