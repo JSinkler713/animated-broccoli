@@ -11,9 +11,9 @@ function organizingContainers(container) {
   * In other words if a ball occurs 12 times, we better have a container with 12 spots
   *
   *
-  
+
   *                 [0, 2, 1]               [1, 1, 1],   [2, 0, 0]
-  *      swap operations 
+  *      swap operations
   *                 /   |   \
   *   swapFromOindex.  1index 2index ...
   *
@@ -33,6 +33,13 @@ function organizingContainers(container) {
           }
       })
   })
+  let countsArr = []
+  Object.keys(totalCounts).forEach(key=> {
+      countsArr.push(totalCounts[key])
+  })
+  // sort countsArr
+  countsArr.sort((a,b)=> a-b)
+  console.log(countsArr, 'is the counts arr')
   const containerSizes = {} // {'0': 2, '1': 3, ...index and size}
     container.forEach((smallContainer, containerIndex) => {
       containerSizes[containerIndex] = 0
@@ -43,56 +50,22 @@ function organizingContainers(container) {
       })
   })
   // make an array of sizes, and array of totalcounts
-  // sort them and compare that they are the same, 
+  // sort them and compare that they are the same,
   // if so it's 'possible' else it's 'impossible'
   let arrayOfSizes = Object.keys(containerSizes).map(key=> containerSizes[key])
-  
-  let arrayOfCounts = Object.keys(totalCounts).map(typeOfBall=> {
-      let countOfBall = totalCounts[typeOfBall]
-      return countOfBall
-  })
-  arrayOfSizes.sort((a,b)=> a<b)
-  arrayOfCounts.sort((a,b)=> a<b)
-  for (let i=0; i< arrayOfSizes.length || i< arrayOfCounts.length; i++) {
-      if (arrayOfCounts[i] != arrayOfSizes[i]) {
-          return 'Impossible'
+  // sort the arrayOfSizes
+  arrayOfSizes.sort((a,b)=>a-b)
+  let notPossible = false;
+  for (let i=0; i<arrayOfSizes.length && i<countsArr.length; i++){
+      if (!arrayOfSizes[i] || !countsArr[i] || arrayOfSizes[i] !== countsArr[i]) {
+          notPossible = true
       }
   }
-  return 'Possible'
-
-  
-  console.log('ARRAYS', arrayOfCounts, arrayOfSizes)
-  //console.log('sizes: ', containerSizes)
-  //console.log('total counts: ', totalCounts)
-  // we know there must be a container with a size equal to each totalCounts or else it is impossible
-  // quick loop through making sure that there is one for each size
-  //let arrOfSizes = Object.keys.map((key)=> containerSizes[key])
-  /*
-  let copyOfCounts = {...totalCounts}
-  // switch around so the objects are the sizes, and counts, don't need index just need frequencies
-  let countFrequencies = {}
-  Object.keys(totalCounts).forEach(totalCountKey => {
-      if (!countFrequencies[totalCounts[totalCountKey]]) {
-          countFrequencies[totalCounts[totalCountKey]] = 1
-      } else {
-          countFrequencies[totalCounts[totalCountKey]] += 1
-      }
-  })
-  console.log('CouNT FREQUEnCY')
-  console.log(countFrequencies)
-  let sizeFrequency = {}
-  Object.keys(containerSizes).forEach(key=> {
-      if (!sizeFrequency[containerSizes[key]]) {
-          sizeFrequency[containerSizes[key]] = 1
-      } else {
-          sizeFrequency[containerSizes[key]] += 1
-      }
-  })
-  console.log('SIZE FREQUENCY', sizeFrequency)
-  if (JSON.stringify(countFrequencies) == JSON.stringify(sizeFrequency)) {
-  return 'Possible'
-  } else {
+  if (notPossible) {
       return 'Impossible'
+  } else {
+      return 'Possible'
   }
-  */
 }
+
+console.log(organizingContainers([[1,4],[2,3]])) // return 'Impossible'
